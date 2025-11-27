@@ -32,7 +32,7 @@ A estrutura deste projeto segue estritamente a hierarquia química proposta na m
 
 A arquitetura reflete diretamente os conceitos teóricos:
 
-````text
+```text
 src/
 ├── components/
 │   ├── atoms/          # Componentes básicos (ex: Button.tsx)
@@ -41,13 +41,15 @@ src/
 │   └── templates/      # Layouts de página (ex: DashboardLayout.tsx)
 ├── pages/              # Telas da aplicação
 └── styles/             # Configurações globais
+```
 
 ## 🚀 Como Executar
 
 1. Clone o repositório:
+
 ```bash
 git clone https://github.com/GarciaGGOO/atomic-lab.git
-````
+```
 
 2. Instale as dependências:
 
