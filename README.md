@@ -4,6 +4,9 @@ Este projeto é um laboratório prático focado na implementação e estudo da m
 
 O objetivo é demonstrar como interfaces complexas podem ser construídas a partir de componentes menores, reutilizáveis e isolados, utilizando **React**, **TypeScript** e **TailwindCSS**.
 
+<img width="1263" height="822" alt="image" src="https://github.com/user-attachments/assets/4212ea1a-7921-489e-ba6e-e6fff6bff48a" />
+
+
 ## 📚 Conceito (A Metodologia)
 
 > "Atomic design is a methodology for creating design systems." — Brad Frost
