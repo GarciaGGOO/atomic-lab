@@ -88,7 +88,7 @@ export const ButtonExample = () => {
         <div className="absolute inset-[-50%] -z-20 h-[200%] w-[200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-30 mix-blend-overlay content-[''] group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* 2. O Brilho de Neon Pulsante (Camada Média) */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-300 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
 
         {/* 3. Efeito de Vidro Fosco (Overlay) */}
         <div className="absolute inset-[2px] -z-10 rounded-[10px] bg-black/40 backdrop-blur-md transition-colors duration-300 group-hover:bg-black/20" />

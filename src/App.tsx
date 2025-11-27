@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50 text-slate-800 p-4 md:p-8">
       {/* Container Principal Centralizado */}
-      <div className="max-w-5xl mx-auto space-y-8">
+      <div className="max-w-4x1 mx-auto space-y-8">
         {/* Cabeçalho e Navegação */}
         <div className="flex flex-col items-center gap-6">
           <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
@@ -52,9 +52,17 @@ function App() {
               </div>
 
               {/* Grid Layout para os componentes */}
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <ComponentCard title="Text Field">
                   <TextFieldExample />
+                </ComponentCard>
+
+                <ComponentCard title="Buttons">
+                  <ButtonExample />
+                </ComponentCard>
+
+                <ComponentCard title="Button Group" className="">
+                  <GroupExample />
                 </ComponentCard>
 
                 <ComponentCard title="Text Area">
@@ -63,14 +71,6 @@ function App() {
 
                 <ComponentCard title="Combo Box">
                   <ComboBoxExample />
-                </ComponentCard>
-
-                <ComponentCard title="Buttons">
-                  <ButtonExample />
-                </ComponentCard>
-
-                <ComponentCard title="Button Group" className="md:col-span-2">
-                  <GroupExample />
                 </ComponentCard>
               </div>
             </div>

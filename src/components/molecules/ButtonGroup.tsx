@@ -159,56 +159,64 @@ export const GroupExample = () => {
       <h3 className="text-sm font-bold border-t border-gray-300 pt-2">
         Toolbar (Ações)
       </h3>
-      <ButtonGroup orientation={orientation}>
-        <Button
-          variant="secondary"
-          onClick={() => alert("Salvou!")}
-          size={size}
-        >
-          Salvar
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => alert("Duplicou!")}
-          size={size}
-        >
-          Duplicar
-        </Button>
-        <Button
-          variant="secondary"
-          onClick={() => alert("Copiar!")}
-          size={size}
-        >
-          Copiar
-        </Button>
-        <Button
-          variant="primary"
-          onClick={() => alert("Informação!")}
-          size={size}
-        >
-          <Info />
-        </Button>
+      <div className="overflow-x-auto overflow-y-clip">
+        <ButtonGroup orientation={orientation}>
+          <Button
+            variant="secondary"
+            onClick={() => alert("Salvou!")}
+            size={size}
+          >
+            Salvar
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => alert("Duplicou!")}
+            size={size}
+          >
+            Duplicar
+          </Button>
+          <Button
+            variant="secondary"
+            onClick={() => alert("Copiar!")}
+            size={size}
+          >
+            Copiar
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => alert("Informação!")}
+            size={size}
+          >
+            <Info />
+          </Button>
 
-        <Button variant="danger" onClick={() => alert("Deletou!")} size={size}>
-          Excluir
-        </Button>
+          <Button
+            variant="danger"
+            onClick={() => alert("Deletou!")}
+            size={size}
+          >
+            Excluir
+          </Button>
 
-        <Button
-          variant="custom"
-          size={size}
-          className="
+          <Button
+            variant="custom"
+            size={size}
+            className="
           group relative isolate overflow-hidden rounded-xl bg-transparent
           transition-all duration-500 ease-out
           hover:scale-110 hover:shadow-[0_0_60px_-15px_rgba(168,85,247,0.8)]
           active:scale-95
-        "
-        >
-          <div className="absolute inset-[-50%] -z-20 h-[200%] w-[200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-30 mix-blend-overlay content-[''] group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
-          <span className="text-white drop-shadow-none animate-pulse">⚡</span>
-          <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-[shimmer_1s_infinite]" />
-        </Button>
-      </ButtonGroup>
+          "
+          >
+            <div className="absolute inset-[-50%] -z-20 h-[200%] w-[200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-30 mix-blend-overlay content-[''] group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
+            <span className="text-white drop-shadow-none animate-pulse">
+              ⚡
+            </span>
+            <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-[shimmer_1s_infinite]" />
+          </Button>
+        </ButtonGroup>
+      </div>
     </div>
   );
 };
