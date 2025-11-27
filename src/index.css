@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+/* Configuração do Tema no v4 */
+@theme {
+  /* Define o nome da classe utilitária: animate-shimmer */
+  --animate-shimmer: shimmer 10s infinite;
+
+  /* Define os keyframes padrão do CSS */
+  @keyframes shimmer {
+    100% {
+      transform: translateX(300%);
+    }
+  }
+}

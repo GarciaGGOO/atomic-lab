@@ -2,7 +2,7 @@ import React, { useId } from "react";
 import * as Select from "@radix-ui/react-select";
 import { CheckIcon, ChevronDownIcon } from "@radix-ui/react-icons";
 import { cn } from "../../lib/utils";
-import { FieldWrapper } from "../atoms/FieldWrapper";
+import { FieldWrapper } from "./FieldWrapper";
 
 // Definindo o formato das opções
 export interface SelectOption {
@@ -110,16 +110,13 @@ export const ComboBoxExample = () => {
   const [cargo, setCargo] = React.useState("");
 
   return (
-    <div className="flex flex-col gap-6 p-4 border rounded-lg bg-gray-50 border-dashed border-gray-300">
-      <h3 className="font-bold text-gray-900">ComboBox (Keyboard Ready)</h3>
-
+    <div className="flex flex-col gap-6">
       <p className="text-xs text-gray-500 mb-2">
         Teste: Use <strong>Tab</strong> para focar, <strong>Setas</strong> para
         navegar e <strong>Enter</strong> para selecionar.
       </p>
 
       {/* 1. Uso Básico */}
-
       <ComboBox
         label="Selecione seu Cargo"
         value={cargo}

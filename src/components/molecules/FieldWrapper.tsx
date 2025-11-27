@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { Label } from "./Label";
+import { Label } from "../atoms/Label";
 
 interface FieldWrapperProps {
   label?: string;

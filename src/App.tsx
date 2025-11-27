@@ -99,8 +99,6 @@ function App() {
   );
 }
 
-// Um pequeno componente auxiliar interno para deixar o código mais limpo
-// e dar uma "moldura" para cada exemplo.
 function ComponentCard({
   title,
   children,
@@ -115,7 +113,7 @@ function ComponentCard({
       <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider pl-1">
         {title}
       </h3>
-      <div className="p-6 rounded-xl border border-dashed border-gray-300 hover:border-indigo-300 hover:bg-gray-50 transition-colors flex justify-center items-center">
+      <div className="p-6 rounded-xl border border-dashed border-gray-300 hover:border-indigo-300 transition-colors flex justify-center items-center">
         <div className="w-full max-w-md">{children}</div>
       </div>
     </div>

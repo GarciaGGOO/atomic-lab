@@ -1,6 +1,6 @@
 import { forwardRef, useId, type TextareaHTMLAttributes } from "react";
 import { cn } from "../../lib/utils";
-import { FieldWrapper } from "../atoms/FieldWrapper";
+import { FieldWrapper } from "./FieldWrapper";
 
 interface TextAreaFieldProps
   extends TextareaHTMLAttributes<HTMLTextAreaElement> {
@@ -42,9 +42,7 @@ TextAreaField.displayName = "TextAreaField";
 
 export const TextAreaFieldExample = () => {
   return (
-    <div className="flex flex-col gap-6 p-4 border rounded-lg bg-gray-50 border-dashed border-gray-300">
-      <h3 className="font-bold text-gray-900">TextAreaField Gallery</h3>
-
+    <div className="flex flex-col gap-6">
       {/* 1. Simples */}
       <TextAreaField
         label="Biografia"
@@ -70,7 +68,7 @@ export const TextAreaFieldExample = () => {
         label="Observações Adicionais"
         placeholder="Digite aqui..."
         rows={5}
-        className="resize-none" // Exemplo passando classe extra para travar o resize
+        className="resize-none"
       />
     </div>
   );

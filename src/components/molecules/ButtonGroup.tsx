@@ -91,8 +91,7 @@ export const GroupExample = () => {
   };
 
   return (
-    <div className="flex flex-col gap-6 p-4 border rounded-lg bg-gray-50 border-dashed border-gray-300">
-      <h3 className="font-bold text-gray-900">GroupButton Gallery</h3>
+    <div className="flex flex-col gap-6">
       <Button
         onClick={toggleOrientation}
         className="mb-2"
@@ -192,6 +191,22 @@ export const GroupExample = () => {
 
         <Button variant="danger" onClick={() => alert("Deletou!")} size={size}>
           Excluir
+        </Button>
+
+        <Button
+          variant="custom"
+          size={size}
+          className="
+          group relative isolate overflow-hidden rounded-xl bg-transparent
+          transition-all duration-500 ease-out
+          hover:scale-110 hover:shadow-[0_0_60px_-15px_rgba(168,85,247,0.8)]
+          active:scale-95
+        "
+        >
+          <div className="absolute inset-[-50%] -z-20 h-[200%] w-[200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-30 mix-blend-overlay content-[''] group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
+          <span className="text-white drop-shadow-none animate-pulse">⚡</span>
+          <div className="absolute -inset-full top-0 block h-full w-1/2 -skew-x-12 bg-gradient-to-r from-transparent to-white opacity-40 group-hover:animate-[shimmer_1s_infinite]" />
         </Button>
       </ButtonGroup>
     </div>
