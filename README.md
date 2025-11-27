@@ -1,73 +1,64 @@
-# React + TypeScript + Vite
+# ⚛️ Atomic Design System - React Study
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este projeto é um laboratório prático focado na implementação e estudo da metodologia **Atomic Design**, criada por [Brad Frost](https://atomicdesign.bradfrost.com/).
 
-Currently, two official plugins are available:
+O objetivo é demonstrar como interfaces complexas podem ser construídas a partir de componentes menores, reutilizáveis e isolados, utilizando **React**, **TypeScript** e **TailwindCSS**.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📚 Conceito (A Metodologia)
 
-## React Compiler
+> "Atomic design is a methodology for creating design systems." — Brad Frost
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+A estrutura deste projeto segue estritamente a hierarquia química proposta na metodologia:
 
-## Expanding the ESLint configuration
+1.  **Atoms (Átomos):** Blocos de construção indivisíveis. Se quebrados, perdem a função.
+    - _No projeto:_ `Button`, `Input`, `Label`, `Icon`.
+2.  **Molecules (Moléculas):** Grupos de átomos unidos que funcionam como uma unidade.
+    - _No projeto:_ `TextField` (Label + Input), `SearchBar`.
+3.  **Organisms (Organismos):** Grupos de moléculas e/ou átomos que formam seções distintas da interface.
+    - _No projeto:_ `UserRegistrationForm`, `Header`, `Footer`.
+4.  **Templates:** Estruturas de página que definem o layout sem conteúdo real.
+    - _No projeto:_ Define onde o Header, o Form e o Footer se encaixam.
+5.  **Pages (Páginas):** Instâncias específicas dos templates preenchidas com conteúdo real.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+🔗 **Referência Oficial:** [Atomic Design by Brad Frost](https://atomicdesign.bradfrost.com/)
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## 🛠️ Tecnologias
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+- **Core:** [React](https://reactjs.org/) + [Vite](https://vitejs.dev/)
+- **Linguagem:** [TypeScript](https://www.typescriptlang.org/) (Tipagem estrita para Props)
+- **Estilização:** [Tailwind CSS](https://tailwindcss.com/) (Utility-first)
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 📂 Estrutura de Pastas
+
+A arquitetura reflete diretamente os conceitos teóricos:
+
+````text
+src/
+├── components/
+│   ├── atoms/          # Componentes básicos (ex: Button.tsx)
+│   ├── molecules/      # Composições simples (ex: SearchBar.tsx)
+│   ├── organisms/      # Seções complexas (ex: NavBar.tsx)
+│   └── templates/      # Layouts de página (ex: DashboardLayout.tsx)
+├── pages/              # Telas da aplicação
+└── styles/             # Configurações globais
+
+## 🚀 Como Executar
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/GarciaGGOO/atomic-lab.git
+````
+
+2. Instale as dependências:
+
+```bash
+npm install
+# ou
+yarn
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+3. Rode o servidor de desenvolvimento:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
