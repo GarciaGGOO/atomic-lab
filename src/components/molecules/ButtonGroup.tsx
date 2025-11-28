@@ -176,13 +176,6 @@ export const GroupExample = () => {
             Duplicar
           </Button>
           <Button
-            variant="secondary"
-            onClick={() => alert("Copiar!")}
-            size={size}
-          >
-            Copiar
-          </Button>
-          <Button
             variant="primary"
             onClick={() => alert("Informação!")}
             size={size}
@@ -209,7 +202,7 @@ export const GroupExample = () => {
           "
           >
             <div className="absolute inset-[-50%] -z-20 h-[200%] w-[200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-30 mix-blend-overlay content-[''] group-hover:opacity-100 transition-opacity duration-500" />
-            <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
+            <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-green-600 via-teal-600 to-sky-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
             <span className="text-white drop-shadow-none animate-pulse">
               ⚡
             </span>

@@ -2,26 +2,50 @@ import { useState } from "react";
 import "./App.css";
 import { Button, ButtonExample } from "./components/atoms/Button";
 import { ButtonGroup, GroupExample } from "./components/molecules/ButtonGroup";
-import { ComboBoxExample } from "./components/molecules/ComboBox";
 import { TextAreaFieldExample } from "./components/molecules/TextAreaField";
 import { TextFieldExample } from "./components/molecules/TextField";
 import { UserRegistrationForm } from "./components/organisms/UserRegistrationForm";
+import { cn } from "./lib/utils";
+import { ComboboxExamples } from "./pages/ComboboxExamples";
+import { ComboboxExample } from "./components/molecules/Combobox";
 
 function App() {
-  const [aba, setAba] = useState<"gallery" | "forms">("gallery");
+  const [aba, setAba] = useState<"lab" | "gallery" | "forms">("lab");
 
   return (
-    <div className="min-h-screen bg-gray-50 text-slate-800 p-4 md:p-8">
-      {/* Container Principal Centralizado */}
-      <div className="max-w-4x1 mx-auto space-y-8">
-        {/* Cabeçalho e Navegação */}
+    <div
+      className={cn(
+        "min-h-screen p-4 md:p-8 transition-colors duration-300",
+        aba === "lab"
+          ? "bg-slate-950 text-slate-200"
+          : "bg-gray-50 text-slate-800"
+      )}
+    >
+      <div className="max-w-4xl mx-auto space-y-8">
         <div className="flex flex-col items-center gap-6">
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">
+          <h1
+            className={cn(
+              "text-3xl font-bold tracking-tight transition-colors duration-300",
+              aba === "lab" ? "text-slate-100" : "text-slate-900"
+            )}
+          >
             Design System Showcase
           </h1>
-
-          <div className="bg-white p-1.5 rounded-lg shadow-sm border border-gray-200">
+          <div
+            className={cn(
+              "p-1.5 rounded-lg shadow-sm border transition-colors duration-300",
+              aba === "lab"
+                ? "bg-slate-900 border-slate-800"
+                : "bg-white border-gray-200"
+            )}
+          >
             <ButtonGroup>
+              <Button
+                variant={aba === "lab" ? "primary" : "secondary"}
+                onClick={() => setAba("lab")}
+              >
+                Laboratório
+              </Button>
               <Button
                 variant={aba === "gallery" ? "primary" : "secondary"}
                 onClick={() => setAba("gallery")}
@@ -38,8 +62,46 @@ function App() {
           </div>
         </div>
 
-        {/* Área de Conteúdo Principal */}
-        <main className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-10 min-h-[600px]">
+        <main
+          className={cn(
+            "rounded-2xl shadow-sm border p-6 md:p-10 min-h-[600px] transition-colors duration-300",
+            aba === "lab"
+              ? "bg-slate-950 border-slate-800 text-slate-200"
+              : "bg-white border-gray-200"
+          )}
+        >
+          {aba === "lab" && (
+            <div className="space-y-6">
+              <div
+                className={cn(
+                  "border-b pb-4 mb-6",
+                  aba === "lab" ? "border-slate-800" : "border-gray-200"
+                )}
+              >
+                <h2
+                  className={cn(
+                    "text-xl font-semibold",
+                    aba === "lab" ? "text-slate-100" : "text-slate-700"
+                  )}
+                >
+                  Componentes Atômicos & Moleculares
+                </h2>
+                <p
+                  className={cn(
+                    "text-sm",
+                    aba === "lab" ? "text-slate-400" : "text-slate-500"
+                  )}
+                >
+                  laboratório de experimentação com os componentes.
+                </p>
+
+                <ComponentCard title="Combo Box" className="bg-gray-50 mt-6">
+                  <ComboboxExamples />
+                </ComponentCard>
+              </div>
+            </div>
+          )}
+
           {aba === "gallery" && (
             <div className="space-y-6">
               <div className="border-b pb-4 mb-6">
@@ -51,7 +113,6 @@ function App() {
                 </p>
               </div>
 
-              {/* Grid Layout para os componentes */}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <ComponentCard title="Text Field">
                   <TextFieldExample />
@@ -70,7 +131,7 @@ function App() {
                 </ComponentCard>
 
                 <ComponentCard title="Combo Box">
-                  <ComboBoxExample />
+                  <ComboboxExample />
                 </ComponentCard>
               </div>
             </div>

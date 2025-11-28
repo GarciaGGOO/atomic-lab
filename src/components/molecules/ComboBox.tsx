@@ -1,142 +1,222 @@
-import React, { useId } from "react";
-import * as Select from "@radix-ui/react-select";
-import { CheckIcon, ChevronDownIcon } from "@radix-ui/react-icons";
+import React, { useState } from "react";
+import * as Popover from "@radix-ui/react-popover";
+import { Command } from "cmdk";
+import {
+  CheckIcon,
+  ChevronDownIcon,
+  Cross2Icon,
+  MagnifyingGlassIcon,
+} from "@radix-ui/react-icons";
 import { cn } from "../../lib/utils";
 import { FieldWrapper } from "./FieldWrapper";
 
-// Definindo o formato das opções
 export interface SelectOption {
   label: string;
   value: string;
 }
 
-interface ComboBoxProps {
+interface ComboboxProps {
   label?: string;
-  placeholder?: string;
   options: SelectOption[];
-  error?: string;
   value?: string;
   onChange: (value: string) => void;
+  placeholder?: string;
+  searchPlaceholder?: string;
+  error?: string;
   disabled?: boolean;
-  name?: string;
-  required?: boolean;
 }
 
-export const ComboBox = ({
+// --- ESTILOS CORRIGIDOS ---
+const styles = {
+  command: "flex h-full w-full flex-col overflow-hidden rounded-md bg-white",
+  input:
+    "flex h-10 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-gray-500",
+  list: "max-h-[300px] overflow-y-auto overflow-x-hidden p-1",
+  // CORREÇÃO AQUI:
+  // 1. Removi regras de opacidade para evitar o visual "fantasma".
+  // 2. Mudei para cinza (gray-100) e preto (text-gray-900) para garantir contraste.
+  // 3. Adicionei 'aria-selected' além de 'data-selected' para garantir compatibilidade.
+  item: cn(
+    "relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors",
+    // Cor padrão do texto
+    "text-gray-900",
+    // Estilo quando o item está FOCADO/SELECIONADO (mouse over ou setas)
+    "data-[selected=true]:bg-gray-100 data-[selected=true]:text-black",
+    "aria-selected:bg-gray-100 aria-selected:text-black" // Fallback para algumas versões
+  ),
+};
+
+export const Combobox = ({
   label,
   options,
-  placeholder,
-  error,
   value,
   onChange,
+  placeholder = "Selecione...",
+  searchPlaceholder = "Buscar...",
+  error,
   disabled,
-  name,
-  required,
-}: ComboBoxProps) => {
-  const generatedId = useId();
-  const hasError = !!error;
+}: ComboboxProps) => {
+  const [open, setOpen] = useState(false);
+
+  const selectedLabel = options.find((opt) => opt.value === value)?.label;
+
+  const handleClear = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    onChange("");
+  };
 
   return (
-    <FieldWrapper
-      label={label}
-      error={error}
-      required={required}
-      htmlFor={generatedId}
-    >
-      <Select.Root
-        value={value}
-        onValueChange={onChange}
-        disabled={disabled}
-        name={name}
-      >
-        <Select.Trigger
-          id={generatedId}
-          className={cn(
-            // Layout e tipografia base
-            "flex justify-between items-center w-full rounded-md border px-2 py-1.5 text-sm bg-white",
-            // Cores de borda e texto
-            "border-gray-300 placeholder:text-gray-400 text-gray-900",
-            // Estados de foco (Anel azul)
-            "focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent",
-            // Estado Disabled
-            "disabled:cursor-not-allowed disabled:opacity-50 disabled:bg-gray-100 disabled:text-gray-500",
-            // Cor do texto quando é placeholder
-            "data-[placeholder]:text-gray-400 text-gray-900",
-            // Estado de Erro
-            hasError && "border-red-500 focus:ring-red-500"
-          )}
-        >
-          <Select.Value placeholder={placeholder || "Selecione..."} />
-          <Select.Icon>
-            <ChevronDownIcon className="h-4 w-4 opacity-50" />
-          </Select.Icon>
-        </Select.Trigger>
-
-        <Select.Portal>
-          <Select.Content
-            className="z-50 min-w-[var(--radix-select-trigger-width)] overflow-hidden rounded-md border border-gray-200 bg-white shadow-md animate-in fade-in-80 zoom-in-95"
-            position="popper"
-            sideOffset={5}
+    <FieldWrapper label={label} error={error}>
+      <Popover.Root open={open} onOpenChange={setOpen}>
+        <Popover.Trigger asChild disabled={disabled}>
+          <div
+            role="combobox"
+            aria-expanded={open}
+            className={cn(
+              "flex w-full items-center justify-between rounded-md border px-3 py-2 text-sm transition-colors cursor-pointer",
+              "bg-white border-gray-300 hover:bg-gray-50",
+              "focus:outline-none focus:ring-2 focus:ring-blue-500",
+              error && "border-red-500 focus:ring-red-500",
+              disabled && "cursor-not-allowed opacity-50 bg-gray-100"
+            )}
           >
-            <Select.Viewport className="p-1">
-              {options.map((option) => (
-                <Select.Item
-                  key={option.value}
-                  value={option.value}
-                  className={cn(
-                    "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-8 pr-2 text-sm outline-none",
-                    "focus:bg-blue-100 focus:text-blue-900",
-                    "data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                  )}
+            <span className={cn("truncate", !value && "text-gray-400")}>
+              {selectedLabel || placeholder}
+            </span>
+
+            <div className="flex items-center gap-2">
+              {value && !disabled && (
+                <div
+                  role="button"
+                  onClick={handleClear}
+                  className="rounded-full p-0.5 hover:bg-gray-200 text-gray-500 transition-colors z-10"
                 >
-                  <span className="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
-                    <Select.ItemIndicator>
-                      <CheckIcon className="h-4 w-4 text-blue-600" />
-                    </Select.ItemIndicator>
-                  </span>
-                  <Select.ItemText>{option.label}</Select.ItemText>
-                </Select.Item>
-              ))}
-            </Select.Viewport>
-          </Select.Content>
-        </Select.Portal>
-      </Select.Root>
+                  <Cross2Icon className="h-4 w-4" />
+                </div>
+              )}
+              <ChevronDownIcon className="h-4 w-4 opacity-50" />
+            </div>
+          </div>
+        </Popover.Trigger>
+
+        <Popover.Portal>
+          <Popover.Content
+            className="z-50 w-[var(--radix-popover-trigger-width)] min-w-[200px] rounded-md border border-gray-200 bg-white shadow-md p-0"
+            align="start"
+            sideOffset={5}
+            // Importante: evita conflito de foco em telas sensíveis ao toque
+            onOpenAutoFocus={(e) => e.preventDefault()}
+          >
+            <Command className={styles.command} shouldFilter={true}>
+              <div className="flex items-center border-b px-3">
+                <MagnifyingGlassIcon className="mr-2 h-4 w-4 shrink-0 opacity-50" />
+                <Command.Input
+                  placeholder={searchPlaceholder}
+                  className={styles.input}
+                />
+              </div>
+
+              <Command.List className={styles.list}>
+                <Command.Empty className="py-6 text-center text-sm text-gray-500">
+                  Nenhum resultado.
+                </Command.Empty>
+
+                <Command.Group>
+                  {options.map((option) => (
+                    <Command.Item
+                      key={option.value}
+                      value={option.label}
+                      onSelect={() => {
+                        console.log("Clicou em:", option.label); // Debug
+                        onChange(option.value === value ? "" : option.value);
+                        setOpen(false);
+                      }}
+                      className={styles.item}
+                    >
+                      <CheckIcon
+                        className={cn(
+                          "mr-2 h-4 w-4",
+                          value === option.value ? "opacity-100" : "opacity-0"
+                        )}
+                      />
+                      {option.label}
+                    </Command.Item>
+                  ))}
+                </Command.Group>
+              </Command.List>
+            </Command>
+          </Popover.Content>
+        </Popover.Portal>
+      </Popover.Root>
     </FieldWrapper>
   );
 };
 
 // --- Exemplo ---
-export const ComboBoxExample = () => {
-  const [cargo, setCargo] = React.useState("");
+export const ComboboxExample = () => {
+  const [cargo, setCargo] = useState("");
+  const [framework, setFramework] = useState("");
+
+  // Lista maior para demonstrar o poder da busca/filtro
+  const cargosOptions = [
+    { label: "Desenvolvedor Frontend", value: "front" },
+    { label: "Desenvolvedor Backend", value: "back" },
+    { label: "Fullstack Developer", value: "full" },
+    { label: "DevOps Engineer", value: "devops" },
+    { label: "Product Owner", value: "po" },
+    { label: "UI/UX Designer", value: "design" },
+    { label: "QA / Tester", value: "qa" },
+  ];
 
   return (
-    <div className="flex flex-col gap-6">
-      <p className="text-xs text-gray-500 mb-2">
-        Teste: Use <strong>Tab</strong> para focar, <strong>Setas</strong> para
-        navegar e <strong>Enter</strong> para selecionar.
-      </p>
+    <div className="flex flex-col gap-6 w-full max-w-sm mx-auto p-4">
+      <div className="space-y-1">
+        <h2 className="text-lg font-semibold">Exemplo Combobox (Command)</h2>
+        <p className="text-xs text-gray-500">
+          Agora com <strong>busca</strong>, <strong>filtro</strong> e limpeza
+          nativa.
+        </p>
+      </div>
 
-      {/* 1. Uso Básico */}
-      <ComboBox
+      {/* 1. Uso Básico (com lista maior) */}
+      <Combobox
         label="Selecione seu Cargo"
         value={cargo}
         onChange={setCargo}
-        placeholder="Escolha uma opção..."
+        options={cargosOptions}
+        placeholder="Selecione um cargo..."
+        searchPlaceholder="Buscar cargo..." // Nova prop opcional
+      />
+
+      {/* Mostrando o valor selecionado para debug */}
+      <div className="text-xs p-2 bg-gray-100 rounded border">
+        Valor selecionado: <strong>{cargo || "(vazio)"}</strong>
+      </div>
+
+      <hr className="border-gray-200" />
+
+      {/* 2. Com Erro e Lista Pequena */}
+      <Combobox
+        label="Framework Favorito"
+        value={framework}
+        onChange={setFramework}
+        error={!framework ? "Este campo é obrigatório" : undefined}
+        placeholder="Escolha..."
         options={[
-          { label: "Desenvolvedor Frontend", value: "front" },
-          { label: "Desenvolvedor Backend", value: "back" },
-          { label: "Fullstack", value: "full" },
-          { label: "DevOps", value: "devops" },
+          { label: "React", value: "react" },
+          { label: "Vue", value: "vue" },
+          { label: "Angular", value: "angular" },
+          { label: "Svelte", value: "svelte" },
         ]}
       />
 
-      {/* 2. Com Erro */}
-      <ComboBox
-        label="Estado"
-        error="Campo obrigatório"
+      {/* 3. Estado Desabilitado */}
+      <Combobox
+        label="Departamento (Desabilitado)"
+        value="ti"
+        disabled
         onChange={() => {}}
-        options={[]}
-        placeholder="Selecione..."
+        options={[{ label: "Tecnologia da Informação", value: "ti" }]}
       />
     </div>
   );

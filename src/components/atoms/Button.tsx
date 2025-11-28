@@ -60,19 +60,19 @@ export const ButtonExample = () => {
       </div>
 
       <Button variant="primary" size={size}>
-        Primary Button lg
+        Primary Button {size}
       </Button>
 
       <Button variant="secondary" size={size}>
-        Secondary Button
+        Secondary Button {size}
       </Button>
 
       <Button variant="danger" size={size}>
-        Danger Button
+        Danger Button {size}
       </Button>
 
       <Button variant="ghost" size={size}>
-        Ghost Button
+        Ghost Button {size}
       </Button>
       <Button
         variant="custom"
@@ -88,13 +88,13 @@ export const ButtonExample = () => {
         <div className="absolute inset-[-50%] -z-20 h-[200%] w-[200%] animate-[spin_4s_linear_infinite] bg-[conic-gradient(from_0deg,transparent_0_340deg,white_360deg)] opacity-30 mix-blend-overlay content-[''] group-hover:opacity-100 transition-opacity duration-500" />
 
         {/* 2. O Brilho de Neon Pulsante (Camada Média) */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-purple-600 via-fuchsia-600 to-blue-300 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
+        <div className="absolute inset-0 -z-10 bg-gradient-to-tr from-green-600 via-teal-600 to-sky-600 opacity-80 transition-all duration-500 group-hover:opacity-100 group-hover:blur-sm" />
 
         {/* 3. Efeito de Vidro Fosco (Overlay) */}
-        <div className="absolute inset-[2px] -z-10 rounded-[10px] bg-black/40 backdrop-blur-md transition-colors duration-300 group-hover:bg-black/20" />
+        <div className="absolute inset-[3px] -z-10 rounded-[10px] bg-black/10 backdrop-blur-md transition-colors duration-300 group-hover:bg-transparent" />
 
         {/* 4. O Texto com Efeito Glitch/Gradiente */}
-        <span className="relative flex items-center justify-center gap-2 text-lg font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-300 group-hover:tracking-[0.4em] group-hover:text-white">
+        <span className="relative flex items-center justify-center gap-2 text-lg font-black tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-white via-blue-200 to-white drop-shadow-[0_0_10px_rgba(255,255,255,0.5)] transition-all duration-300 group-hover:tracking-[0.4em] group-hover:text-white">
           CUSTOM
           {/* Ícone opcional para dar um charme */}
           <span className="text-white drop-shadow-none animate-pulse">⚡</span>

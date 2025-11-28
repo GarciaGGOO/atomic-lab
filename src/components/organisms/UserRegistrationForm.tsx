@@ -1,6 +1,6 @@
 import { useEffect, useState, type FormEvent } from "react";
 import { Button } from "../atoms/Button";
-import { ComboBox } from "../molecules/ComboBox";
+import { Combobox } from "../molecules/Combobox";
 import { TextAreaField } from "../molecules/TextAreaField";
 import { TextField } from "../molecules/TextField";
 
@@ -83,8 +83,8 @@ export const UserRegistrationForm = () => {
         />
       </div>
 
-      {/* ComboBox ocupando largura total */}
-      <ComboBox
+      {/* Combobox ocupando largura total */}
+      <Combobox
         label="Cargo / Função"
         placeholder="Selecione o nível..."
         value={formData.role}
