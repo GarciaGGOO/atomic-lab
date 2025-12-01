@@ -1,8 +1,9 @@
-import { useEffect, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { Button } from "../atoms/Button";
-import { Combobox } from "../molecules/Combobox";
+
 import { TextAreaField } from "../molecules/TextAreaField";
 import { TextField } from "../molecules/TextField";
+import { Combobox } from "../molecules/Combobox";
 
 export const UserRegistrationForm = () => {
   // 1. Estados do Formulário
@@ -88,7 +89,9 @@ export const UserRegistrationForm = () => {
         label="Cargo / Função"
         placeholder="Selecione o nível..."
         value={formData.role}
-        onChange={(value) => setFormData({ ...formData, role: value })}
+        onChange={(value) =>
+          setFormData({ ...formData, role: value as string })
+        }
         error={errors.role}
         disabled={isLoading}
         options={[

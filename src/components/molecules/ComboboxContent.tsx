@@ -1,9 +1,6 @@
 import { forwardRef, type HTMLAttributes } from "react";
 import { cn } from "../../lib/utils";
-import {
-  ComboboxOption,
-  type ComboboxOptionProps,
-} from "../atoms/ComboboxOption";
+import { ComboboxOption } from "../atoms/ComboboxOption";
 import { ComboboxSearch } from "../atoms/ComboboxSearch";
 
 export interface ComboboxContentProps extends HTMLAttributes<HTMLDivElement> {

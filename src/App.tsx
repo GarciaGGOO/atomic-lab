@@ -6,11 +6,13 @@ import { TextAreaFieldExample } from "./components/molecules/TextAreaField";
 import { TextFieldExample } from "./components/molecules/TextField";
 import { UserRegistrationForm } from "./components/organisms/UserRegistrationForm";
 import { cn } from "./lib/utils";
-import { ComboboxExamples } from "./pages/ComboboxExamples";
-import { ComboboxExample } from "./components/molecules/Combobox";
+import { ComboboxExamples } from "./components/molecules/Combobox";
 
 function App() {
-  const [aba, setAba] = useState<"lab" | "gallery" | "forms">("lab");
+  const showLab = import.meta.env.VITE_SHOW_LAB === "true";
+  const [aba, setAba] = useState<"lab" | "gallery" | "forms">(
+    showLab ? "lab" : "gallery"
+  );
 
   return (
     <div
@@ -40,12 +42,14 @@ function App() {
             )}
           >
             <ButtonGroup>
-              <Button
-                variant={aba === "lab" ? "primary" : "secondary"}
-                onClick={() => setAba("lab")}
-              >
-                Laboratório
-              </Button>
+              {showLab && (
+                <Button
+                  variant={aba === "lab" ? "primary" : "secondary"}
+                  onClick={() => setAba("lab")}
+                >
+                  Laboratório
+                </Button>
+              )}
               <Button
                 variant={aba === "gallery" ? "primary" : "secondary"}
                 onClick={() => setAba("gallery")}
@@ -95,8 +99,10 @@ function App() {
                   laboratório de experimentação com os componentes.
                 </p>
 
-                <ComponentCard title="Combo Box" className="bg-gray-50 mt-6">
-                  <ComboboxExamples />
+                <ComponentCard title="Combo Box" className=" bg-gray-50 mt-6">
+                  <div className="flex flex-row">
+                    <ComboboxExamples />
+                  </div>
                 </ComponentCard>
               </div>
             </div>
@@ -131,7 +137,7 @@ function App() {
                 </ComponentCard>
 
                 <ComponentCard title="Combo Box">
-                  <ComboboxExample />
+                  <ComboboxExamples />
                 </ComponentCard>
               </div>
             </div>

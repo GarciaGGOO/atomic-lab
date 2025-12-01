@@ -2,6 +2,7 @@ import {
   forwardRef,
   type HTMLAttributes,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
 } from "react";
@@ -15,13 +16,25 @@ export interface PopoverProps extends HTMLAttributes<HTMLDivElement> {
   align?: "start" | "center" | "end";
 }
 
+type PositionState = { top: number; left: number; width: number } | null;
 export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
-  ({ className, isOpen, onClose, triggerRef, align = "start", children, ...props }, ref) => {
-    const [position, setPosition] = useState({ top: 0, left: 0, width: 0 });
+  (
+    {
+      className,
+      isOpen,
+      onClose,
+      triggerRef,
+      align = "start",
+      children,
+      ...props
+    },
+    ref
+  ) => {
+    const [position, setPosition] = useState<PositionState>(null);
     const popoverRef = useRef<HTMLDivElement>(null);
 
     // Calcula a posição do popover baseado no trigger
-    useEffect(() => {
+    useLayoutEffect(() => {
       if (!isOpen || !triggerRef.current) return;
 
       const updatePosition = () => {
@@ -49,6 +62,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       return () => {
         window.removeEventListener("resize", updatePosition);
         window.removeEventListener("scroll", updatePosition, true);
+        setPosition(null);
       };
     }, [isOpen, triggerRef, align]);
 
@@ -69,7 +83,8 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       };
 
       document.addEventListener("mousedown", handleClickOutside);
-      return () => document.removeEventListener("mousedown", handleClickOutside);
+      return () =>
+        document.removeEventListener("mousedown", handleClickOutside);
     }, [isOpen, onClose, triggerRef]);
 
     // Fecha com Escape
@@ -92,7 +107,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
       <div
         ref={(node) => {
           // Merge refs
-          (popoverRef as React.MutableRefObject<HTMLDivElement | null>).current = node;
+          (
+            popoverRef as React.MutableRefObject<HTMLDivElement | null>
+          ).current = node;
           if (typeof ref === "function") {
             ref(node);
           } else if (ref) {
@@ -101,9 +118,9 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
         }}
         style={{
           position: "absolute",
-          top: position.top,
-          left: position.left,
-          width: position.width,
+          top: position?.top || 0,
+          left: position?.left || 0,
+          width: position?.width || 0,
           minWidth: "200px",
         }}
         className={cn(
@@ -112,7 +129,7 @@ export const Popover = forwardRef<HTMLDivElement, PopoverProps>(
           // Visual
           "bg-white border border-gray-200 shadow-lg",
           // Animação
-          "animate-in fade-in-0 zoom-in-95 duration-150",
+          // "animate-in fade-in-0 zoom-in-95 duration-150",
           className
         )}
         {...props}
