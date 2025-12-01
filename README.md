@@ -6,8 +6,13 @@ O objetivo é demonstrar como interfaces complexas podem ser construídas a part
 
 <!-- <img width="1263" height="822" alt="image" src="https://github.com/user-attachments/assets/4212ea1a-7921-489e-ba6e-e6fff6bff48a" /> -->
 
-<img width="1306" height="822" alt="image" src="https://github.com/user-attachments/assets/6a3b25ed-b7d4-4c15-b81e-6b75d9bd85f5" />
+<!-- <img width="1306" height="822" alt="image" src="https://github.com/user-attachments/assets/6a3b25ed-b7d4-4c15-b81e-6b75d9bd85f5" /> -->
+
+<img width="1262" height="815" alt="image" src="https://github.com/user-attachments/assets/6f475def-1da7-4218-97bc-6a999da1498a" />
+
 <img width="1305" height="818" alt="image" src="https://github.com/user-attachments/assets/542f20fc-d158-4c70-81a2-67e3329fada2" />
+
+
 
 
 ## 📚 Conceito (A Metodologia)
