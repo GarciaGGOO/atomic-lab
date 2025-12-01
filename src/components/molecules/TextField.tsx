@@ -1,14 +1,18 @@
 import { forwardRef, useId } from "react";
 import { Input, type InputProps } from "../atoms/Input";
 import { FieldWrapper } from "./FieldWrapper";
+import { cn } from "../../lib/utils";
+import { Search } from "lucide-react";
 
 interface TextFieldProps extends InputProps {
   label?: string;
   error?: string;
+  StartIcon?: React.ElementType;
+  EndAdornment?: React.ReactNode;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ label, error, id, ...props }, ref) => {
+  ({ label, error, id, StartIcon, EndAdornment, className, ...props }, ref) => {
     const generatedId = useId();
     const inputId = id || generatedId;
 
@@ -19,7 +23,31 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         required={props.required}
         htmlFor={inputId}
       >
-        <Input ref={ref} id={inputId} hasError={!!error} {...props} />
+        <div className="relative flex items-center">
+          {StartIcon && (
+            <div className="absolute left-2 text-gray-500 pointer-events-none">
+              <StartIcon className="size-5" />
+            </div>
+          )}
+
+          <Input
+            ref={ref}
+            id={inputId}
+            hasError={!!error}
+            {...props}
+            className={cn(
+              StartIcon && "pl-8",
+              EndAdornment && "pr-8",
+              className
+            )}
+          />
+
+          {EndAdornment && (
+            <div className="absolute right-2 flex items-center text-gray-500">
+              {EndAdornment}
+            </div>
+          )}
+        </div>
       </FieldWrapper>
     );
   }
@@ -48,6 +76,9 @@ export const TextFieldExample = () => {
 
       {/* 4. Senha */}
       <TextField label="Senha" type="password" placeholder="******" />
+
+      {/* 5. Com Ícone Inicial */}
+      <TextField label="Busca" placeholder="Pesquisar..." StartIcon={Search} />
     </div>
   );
 };

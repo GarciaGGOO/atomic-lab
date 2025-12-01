@@ -2,11 +2,12 @@ import { useState } from "react";
 import "./App.css";
 import { Button, ButtonExample } from "./components/atoms/Button";
 import { ButtonGroup, GroupExample } from "./components/molecules/ButtonGroup";
-import { TextAreaFieldExample } from "./components/molecules/TextAreaField";
+import { TextAreaFieldExample } from "./components/molecules/TextArea";
 import { TextFieldExample } from "./components/molecules/TextField";
 import { UserRegistrationForm } from "./components/organisms/UserRegistrationForm";
 import { cn } from "./lib/utils";
 import { ComboboxExamples } from "./components/molecules/Combobox";
+import { PasswordFieldExample } from "./components/molecules/PasswordField";
 
 function App() {
   const showLab = import.meta.env.VITE_SHOW_LAB === "true";
@@ -23,7 +24,7 @@ function App() {
           : "bg-gray-50 text-slate-800"
       )}
     >
-      <div className="max-w-4xl mx-auto space-y-8">
+      <div className="max-w-300 mx-auto space-y-8">
         <div className="flex flex-col items-center gap-6">
           <h1
             className={cn(
@@ -120,16 +121,20 @@ function App() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <ComponentCard title="Text Field">
-                  <TextFieldExample />
-                </ComponentCard>
-
                 <ComponentCard title="Buttons">
                   <ButtonExample />
                 </ComponentCard>
 
                 <ComponentCard title="Button Group" className="">
                   <GroupExample />
+                </ComponentCard>
+
+                <ComponentCard title="Text Field">
+                  <TextFieldExample />
+                </ComponentCard>
+
+                <ComponentCard title="Password Field">
+                  <PasswordFieldExample />
                 </ComponentCard>
 
                 <ComponentCard title="Text Area">

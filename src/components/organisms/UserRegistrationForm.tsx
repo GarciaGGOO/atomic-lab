@@ -1,7 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Button } from "../atoms/Button";
 
-import { TextAreaField } from "../molecules/TextAreaField";
+import { TextArea } from "../molecules/TextArea";
 import { TextField } from "../molecules/TextField";
 import { Combobox } from "../molecules/Combobox";
 
@@ -105,7 +105,7 @@ export const UserRegistrationForm = () => {
       />
 
       {/* TextArea para biografia */}
-      <TextAreaField
+      <TextArea
         label="Sobre o Colaborador"
         placeholder="Descreva as principais habilidades e experiências..."
         rows={4}
