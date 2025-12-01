@@ -4,10 +4,11 @@ import { Button, ButtonExample } from "./components/atoms/Button";
 import { ButtonGroup, GroupExample } from "./components/molecules/ButtonGroup";
 import { TextAreaFieldExample } from "./components/molecules/TextArea";
 import { TextFieldExample } from "./components/molecules/TextField";
-import { UserRegistrationForm } from "./components/organisms/UserRegistrationForm";
+import { UserProfileForm } from "./components/organisms/UserProfileForm";
 import { cn } from "./lib/utils";
 import { ComboboxExamples } from "./components/molecules/Combobox";
 import { PasswordFieldExample } from "./components/molecules/PasswordField";
+import { AuthForm } from "./components/organisms/AuthForm";
 
 function App() {
   const showLab = import.meta.env.VITE_SHOW_LAB === "true";
@@ -149,19 +150,39 @@ function App() {
           )}
 
           {aba === "forms" && (
-            <div className="flex flex-col items-center justify-center h-full">
-              <div className="w-full max-w-2xl">
-                <div className="mb-8 text-center">
-                  <h2 className="text-2xl font-semibold text-slate-800">
-                    Cadastro de Usuário
-                  </h2>
-                  <p className="text-slate-500">
-                    Exemplo de organismo utilizando os componentes.
-                  </p>
-                </div>
-                <div className="bg-gray-50 p-8 rounded-xl border border-gray-100">
-                  <UserRegistrationForm />
-                </div>
+            <div className="w-full max-w-5xl mx-auto py-10 px-4">
+              {/* Cabeçalho da Seção */}
+              <div className="mb-12 text-center space-y-2">
+                <h2 className="text-3xl font-bold text-gray-900 tracking-tight">
+                  Galeria de Formulários
+                </h2>
+                <p className="text-lg text-slate-500 max-w-2xl mx-auto">
+                  Exemplos de organismos de formulário prontos para uso.
+                </p>
+              </div>
+
+              {/* Lista de Cards */}
+              <div className="flex flex-col gap-16">
+                {/* 1. Card do AuthForm */}
+                <ComponentCard
+                  title="Autenticação e Acesso"
+                  description="Componente unificado para Login e Criação de Conta. Inclui validação de senha, toggle de visibilidade e gerenciamento de estado entre abas."
+                  componentName="AuthForm"
+                >
+                  <AuthForm />
+                </ComponentCard>
+
+                {/* 2. Card do UserProfileForm */}
+                <ComponentCard
+                  title="Cadastro de Usuário"
+                  description="Formulário extenso para coleta de dados cadastrais. Ideal para onboarding ou edição de perfil."
+                  componentName="UserProfileForm"
+                  isFullWidth={true}
+                >
+                  <div className="flex justify-center items-center py-12 px-6">
+                    <UserProfileForm />
+                  </div>
+                </ComponentCard>
               </div>
             </div>
           )}
@@ -171,22 +192,60 @@ function App() {
   );
 }
 
-function ComponentCard({
-  title,
-  children,
-  className = "",
-}: {
+interface ComponentCardProps {
   title: string;
+  description?: string;
+  componentName?: string; // Ex: "UserRegistrationForm"
   children: React.ReactNode;
   className?: string;
-}) {
+  isFullWidth?: boolean; // Se false (padrão), centraliza e limita largura
+}
+
+export function ComponentCard({
+  title,
+  description,
+  componentName,
+  children,
+  className = "",
+  isFullWidth = false,
+}: ComponentCardProps) {
   return (
-    <div className={`flex flex-col gap-3 ${className}`}>
-      <h3 className="text-sm font-medium text-slate-400 uppercase tracking-wider pl-1">
-        {title}
-      </h3>
-      <div className="p-6 rounded-xl border border-dashed border-gray-300 hover:border-indigo-300 transition-colors flex justify-center items-center">
-        <div className="w-full max-w-md">{children}</div>
+    <div className={`flex flex-col gap-4 ${className}`}>
+      {/* --- Cabeçalho do Card --- */}
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-2 px-1">
+        <div className="space-y-1">
+          <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+          {description && (
+            <p className="text-sm text-slate-500 max-w-lg">{description}</p>
+          )}
+        </div>
+
+        {/* A Badge Roxa que você gostou */}
+        {componentName && (
+          <div className="shrink-0">
+            <span className="inline-block px-2.5 py-1 bg-purple-50 text-purple-700 text-[11px] font-mono rounded-md border border-purple-100 select-all">
+              {`<${componentName} />`}
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* --- Área de Preview (Canvas) --- */}
+      <div
+        className={`
+          relative group overflow-hidden
+          rounded-xl border border-gray-200 bg-slate-50/50
+          transition-all duration-300 hover:border-indigo-200 hover:shadow-sm
+          ${isFullWidth ? "" : "flex justify-center items-center py-12 px-6"}
+        `}
+      >
+        {/* Padrão de fundo opcional (grid dots) para dar ar técnico */}
+        <div className="absolute inset-0 opacity-[0.4] pointer-events-none bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:16px_16px]" />
+
+        {/* O Componente em si */}
+        <div className={`relative w-full ${isFullWidth ? "" : "max-w-md"}`}>
+          {children}
+        </div>
       </div>
     </div>
   );

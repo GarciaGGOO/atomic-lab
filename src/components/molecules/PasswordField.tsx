@@ -7,7 +7,7 @@ import { Eye, EyeOff, Lock } from "lucide-react"; // Exemplo usando biblioteca d
 interface PasswordFieldProps
   extends Omit<React.ComponentProps<typeof TextField>, "type"> {}
 
-export const PasswordField = (props: PasswordFieldProps) => {
+export const PasswordField = ({ ...props }: PasswordFieldProps) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const toggleVisibility = () => setShowPassword((prev) => !prev);
@@ -15,6 +15,8 @@ export const PasswordField = (props: PasswordFieldProps) => {
   return (
     <TextField
       {...props}
+      id="password"
+      name="password"
       // Alterna o tipo do input
       type={showPassword ? "text" : "password"}
       // Injeta o botão no final do input

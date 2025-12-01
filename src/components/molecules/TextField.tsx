@@ -9,10 +9,24 @@ interface TextFieldProps extends InputProps {
   error?: string;
   StartIcon?: React.ElementType;
   EndAdornment?: React.ReactNode;
+  autoComplete?: string;
 }
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ label, error, id, StartIcon, EndAdornment, className, ...props }, ref) => {
+  (
+    {
+      label,
+      error,
+      id,
+      name,
+      StartIcon,
+      EndAdornment,
+      className,
+      autoComplete,
+      ...props
+    },
+    ref
+  ) => {
     const generatedId = useId();
     const inputId = id || generatedId;
 
@@ -33,7 +47,9 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           <Input
             ref={ref}
             id={inputId}
+            name={name}
             hasError={!!error}
+            autoComplete={autoComplete}
             {...props}
             className={cn(
               StartIcon && "pl-8",
